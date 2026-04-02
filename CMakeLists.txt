@@ -34,20 +34,6 @@ message("Build type: " ${CMAKE_BUILD_TYPE})
 enable_language(C ASM)
 
 add_library(freertos_config INTERFACE)
-
-target_include_directories(freertos_config SYSTEM INTERFACE
-    ${CMAKE_SOURCE_DIR}/Core/Inc/
-)
-
-include(FetchContent)
-
-FetchContent_Declare(
-    freertos_kernel
-    GIT_REPOSITORY https://github.com/FreeRTOS/FreeRTOS-Kernel.git
-    GIT_TAG main
-)
-
-FetchContent_MakeAvailable(freertos_kernel)
     
 # Create an executable object type
 add_executable(${CMAKE_PROJECT_NAME})
