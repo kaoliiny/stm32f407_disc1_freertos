@@ -24,7 +24,6 @@ set(CMAKE_PROJECT_NAME stm32f4_disc1_rtos)
 # Enable compile command to ease indexing with e.g. clangd
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 
-set(CMAKE_EXE_LINKER_FLAGS_INIT "--specs=nosys.specs")
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
 # Core project settings
@@ -39,3 +38,7 @@ add_executable(${CMAKE_PROJECT_NAME})
 
 add_subdirectory(srcs)
 add_subdirectory(prebuild)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${TOOLCHAIN_PREFIX}objcopy -O binary ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.elf ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.bin
+)
